@@ -4,16 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Library - 個人影片庫</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
             --primary: #ec4899;
             --primary-dark: #db2777;
@@ -25,19 +18,15 @@
             --text-primary: #ffffff;
             --text-secondary: #a1a1aa;
             --border: rgba(255,255,255,0.1);
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a3e 100%);
             min-height: 100vh;
             color: var(--text-primary);
-            line-height: 1.6;
         }
 
-        /* Header */
         .header {
             background: rgba(15, 15, 26, 0.95);
             backdrop-filter: blur(20px);
@@ -83,12 +72,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .logo-text p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        /* Navigation */
         .nav {
             display: flex;
             gap: 0.5rem;
@@ -117,13 +100,6 @@
             border: 1px solid var(--border);
         }
 
-        .nav-btn:not(.active):hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
         .main {
             padding-top: 100px;
             max-width: 1400px;
@@ -133,7 +109,6 @@
             padding-bottom: 3rem;
         }
 
-        /* Stats Bar */
         .stats-bar {
             display: flex;
             gap: 2rem;
@@ -161,86 +136,12 @@
             color: var(--text-secondary);
         }
 
-        /* Search */
-        .search-container {
-            margin-bottom: 2rem;
-        }
-
-        .search-box {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
-        }
-
-        .search-box::placeholder {
-            color: var(--text-secondary);
-        }
-
-        /* Categories */
         .section-title {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .category-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .category-card.active {
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.2));
-            border-color: var(--primary);
-        }
-
-        .category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .category-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .category-count {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        /* Video Grid */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -258,65 +159,12 @@
         .video-card:hover {
             transform: translateY(-4px);
             border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
         }
 
-        .video-thumbnail {
-            position: relative;
+        .video-player {
             width: 100%;
             aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .video-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .video-card:hover .video-thumbnail img {
-            transform: scale(1.05);
-        }
-
-        .play-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .video-card:hover .play-overlay {
-            opacity: 1;
-        }
-
-        .play-btn {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
-        }
-
-        .video-duration {
-            position: absolute;
-            bottom: 0.75rem;
-            right: 0.75rem;
-            background: rgba(0,0,0,0.8);
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
+            background: #000;
         }
 
         .video-info {
@@ -327,13 +175,11 @@
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            line-height: 1.4;
         }
 
         .video-meta {
             display: flex;
             gap: 0.5rem;
-            flex-wrap: wrap;
         }
 
         .meta-tag {
@@ -348,73 +194,17 @@
             color: #f472b6;
         }
 
-        .meta-tag.source {
-            background: var(--bg-hover);
-            color: var(--text-secondary);
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .empty-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Add Hint */
-        .add-hint {
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(6, 182, 212, 0.1));
-            border: 2px dashed rgba(236, 72, 153, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .add-hint h3 {
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-            font-size: 1.25rem;
-        }
-
-        .add-hint p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
                 padding: 1rem;
                 flex-direction: column;
                 gap: 1rem;
             }
-
-            .nav {
-                width: 100%;
-                justify-content: center;
-            }
-
             .main {
                 padding-top: 140px;
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
-
-            .stats-bar {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .video-grid {
                 grid-template-columns: 1fr;
             }
@@ -428,18 +218,11 @@
                 <div class="logo-icon">🎬</div>
                 <div class="logo-text">
                     <h1>Video Library</h1>
-                    <p>個人影片庫</p>
                 </div>
             </div>
             <nav class="nav">
-                <a href="https://ycc702-spec.github.io/my-library/" class="nav-btn">
-                    <span>📚</span>
-                    <span>My Library</span>
-                </a>
-                <a href="https://ycc702-spec.github.io/video-library/" class="nav-btn active">
-                    <span>🎬</span>
-                    <span>Video Library</span>
-                </a>
+                <a href="https://ycc702-spec.github.io/my-library/" class="nav-btn">📚 My Library</a>
+                <a href="https://ycc702-spec.github.io/video-library/" class="nav-btn active">🎬 Video Library</a>
             </nav>
         </div>
     </header>
@@ -451,134 +234,73 @@
                 <span class="stat-label">影片總數</span>
             </div>
             <div class="stat-item">
-                <span class="stat-value">7</span>
+                <span class="stat-value">1</span>
                 <span class="stat-label">分類</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">-</span>
-                <span class="stat-label">最後更新</span>
-            </div>
-        </div>
-
-        <div class="search-container">
-            <input type="text" class="search-box" placeholder="🔍 搜尋影片...">
-        </div>
-
-        <h2 class="section-title">📂 分類瀏覽</h2>
-        <div class="categories">
-            <div class="category-card active">
-                <div class="category-icon">📁</div>
-                <div class="category-name">全部</div>
-                <div class="category-count">5 部</div>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🦵</div>
-                <div class="category-name">復健</div>
-                <div class="category-count">5 部</div>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🏀</div>
-                <div class="category-name">籃球</div>
-                <div class="category-count">0 部</div>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">💰</div>
-                <div class="category-name">財經</div>
-                <div class="category-count">0 部</div>
             </div>
         </div>
 
         <h2 class="section-title">🎬 影片列表</h2>
+        
         <div class="video-grid">
-            <!-- 5個影片卡片 -->
             <div class="video-card">
-                <div class="video-thumbnail" onclick="window.open('https://instagram.ftol2-1.fna.fbcdn.net/o1/v/t16/f2/m84/AQPT6tLx0kVQQF9OixSQZFm0c3nW6j23xfT1GHoPwK9tIW2az8lfi69K9X7a3OsSvG44jV56_KJXkOKbSI_ffoHzoszH_sTGj1W9Ki0.mp4', '_blank')">
-                    <img src="https://instagram.ftol2-1.fna.fbcdn.net/v/t51.2885-15/641056694_18107743159813653_7580984738858403967_n.jpg" alt="Sit to Stand">
-                    <div class="play-overlay">
-                        <div class="play-btn">▶</div>
-                    </div>
-                </div>
+                <video class="video-player" controls poster="https://instagram.ffod1-1.fna.fbcdn.net/v/t51.2885-15/641056694_18107743159813653_7580984738858403967_n.jpg">
+                    <source src="videos/rehab/01_sit_to_stand.mp4" type="video/mp4">
+                </video>
                 <div class="video-info">
-                    <div class="video-title">Sit to Stand - 坐到站</div>
+                    <div class="video-title">01. Sit to Stand - 坐到站</div>
                     <div class="video-meta">
                         <span class="meta-tag category">🦵 復健</span>
-                        <span class="meta-tag source">📷 Instagram</span>
                     </div>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail" onclick="window.open('https://instagram.ftol2-1.fna.fbcdn.net/o1/v/t16/f2/m84/AQNTNTkr07MqT6t4V0qdngI-6kfljAUp7LXF3Vp-LpeU9VwCaNpL5Pdy_CbbUdpIIpLLVYTI1b0Ij_O5d5jZhrAqqjYRc7weCJ2KHjE.mp4', '_blank')">
-                    <img src="https://instagram.ftol2-1.fna.fbcdn.net/v/t51.2885-15/639744761_18107743168813653_724541281372885563_n.jpg" alt="Elevated SO Bridge">
-                    <div class="play-overlay">
-                        <div class="play-btn">▶</div>
-                    </div>
-                </div>
+                <video class="video-player" controls poster="https://instagram.ffod1-1.fna.fbcdn.net/v/t51.2885-15/639744761_18107743168813653_724541281372885563_n.jpg">
+                    <source src="videos/rehab/02_elevated_so_bridge.mp4" type="video/mp4">
+                </video>
                 <div class="video-info">
-                    <div class="video-title">Elevated SO Bridge - 墊高單腳臀橋</div>
+                    <div class="video-title">02. Elevated SO Bridge - 墊高單腳臀橋</div>
                     <div class="video-meta">
                         <span class="meta-tag category">🦵 復健</span>
-                        <span class="meta-tag source">📷 Instagram</span>
                     </div>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail" onclick="window.open('https://instagram.ftol2-1.fna.fbcdn.net/o1/v/t16/f2/m84/AQMVsQ2_SxR6hpfQVdoILVUVwNN1LI6pkAaflnzsraAWC82H1XWOPDp5OgSjiG_PnL4_W-b1HntiIKhxPVE1FGOrgypkE6vNRvns7sE.mp4', '_blank')">
-                    <img src="https://instagram.ftol2-1.fna.fbcdn.net/v/t51.2885-15/638870821_18107743177813653_936437954756282389_n.jpg" alt="SL Wall Hinge">
-                    <div class="play-overlay">
-                        <div class="play-btn">▶</div>
-                    </div>
-                </div>
+                <video class="video-player" controls poster="https://instagram.ffod1-1.fna.fbcdn.net/v/t51.2885-15/638870821_18107743177813653_936437954756282389_n.jpg">
+                    <source src="videos/rehab/03_sl_wall_hinge.mp4" type="video/mp4">
+                </video>
                 <div class="video-info">
-                    <div class="video-title">SL Wall Hinge - 單腳牆面鉸鏈</div>
+                    <div class="video-title">03. SL Wall Hinge - 單腳牆面鉸鏈</div>
                     <div class="video-meta">
                         <span class="meta-tag category">🦵 復健</span>
-                        <span class="meta-tag source">📷 Instagram</span>
                     </div>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail" onclick="window.open('https://instagram.ftol2-1.fna.fbcdn.net/o1/v/t16/f2/m84/AQMq_w1IEk2bm_cxSuk0jAP2jZV2GDbLK7Hoa68_5RvYOPLZQ9M0PhoZ4Ag0kt530WQEOT8EFnzN6R8i8b-eh7FZSQKe1tFIj4EV13w.mp4', '_blank')">
-                    <img src="https://instagram.ftol2-1.fna.fbcdn.net/v/t51.2885-15/639745058_18107743186813653_4048957433011866542_n.jpg" alt="Reverse Tap Down">
-                    <div class="play-overlay">
-                        <div class="play-btn">▶</div>
-                    </div>
-                </div>
+                <video class="video-player" controls poster="https://instagram.ffod1-1.fna.fbcdn.net/v/t51.2885-15/639745058_18107743186813653_4048957433011866542_n.jpg">
+                    <source src="videos/rehab/04_reverse_tap_down.mp4" type="video/mp4">
+                </video>
                 <div class="video-info">
-                    <div class="video-title">Reverse Tap Down - 反向點地</div>
+                    <div class="video-title">04. Reverse Tap Down - 反向點地</div>
                     <div class="video-meta">
                         <span class="meta-tag category">🦵 復健</span>
-                        <span class="meta-tag source">📷 Instagram</span>
                     </div>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail" onclick="window.open('https://instagram.ftol2-1.fna.fbcdn.net/o1/v/t16/f2/m84/AQOckTiEaDyIi6DMjfARP4L5l1T5Hb6kt7mVcjevofRE5DmAS4zV0KFvOuE9ajOrYSf8dazLwDt84ggvjRVOK_LtK9-wtodLRbz_3TA.mp4', '_blank')">
-                    <img src="https://instagram.ftol2-1.fna.fbcdn.net/v/t51.2885-15/643018876_18107743195813653_7593161847224443964_n.jpg" alt="Star Hold">
-                    <div class="play-overlay">
-                        <div class="play-btn">▶</div>
-                    </div>
-                </div>
+                <video class="video-player" controls poster="https://instagram.ffod1-1.fna.fbcdn.net/v/t51.2885-15/643018876_18107743195813653_7593161847224443964_n.jpg">
+                    <source src="videos/rehab/05_star_hold.mp4" type="video/mp4">
+                </video>
                 <div class="video-info">
-                    <div class="video-title">Star Hold - 星形支撐</div>
+                    <div class="video-title">05. Star Hold - 星形支撐</div>
                     <div class="video-meta">
                         <span class="meta-tag category">🦵 復健</span>
-                        <span class="meta-tag source">📷 Instagram</span>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="add-hint">
-            <h3>💡 如何新增影片</h3>
-            <p>
-                傳送影片連結給我（IG、FB、YouTube...）<br>
-                說：「儲存到 Video Library」<br>
-                我會自動分類整理！
-            </p>
         </div>
     </main>
 </body>
